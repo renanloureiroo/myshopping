@@ -28,6 +28,14 @@ export function SignIn() {
       console.error(err)
     }
   }
+  async function handleForgotPassword() {
+    try {
+      await auth().sendPasswordResetEmail(email)
+      Alert.alert("Email de recuperação enviado!")
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   return (
     <Container>
@@ -51,7 +59,7 @@ export function SignIn() {
       <Button title="Entrar" onPress={handleSignInWithEmailAndPassword} />
 
       <Account>
-        <ButtonText title="Recuperar senha" onPress={() => {}} />
+        <ButtonText title="Recuperar senha" onPress={handleForgotPassword} />
         <ButtonText title="Criar minha conta" onPress={handleCreateUser} />
       </Account>
     </Container>
