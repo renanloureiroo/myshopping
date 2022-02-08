@@ -12,6 +12,10 @@ export function Receipts() {
   const [photoSelected, setPhotoSelected] = useState("")
 
   useEffect(() => {
+    fetchPhotos()
+  }, [])
+
+  async function fetchPhotos() {
     storage()
       .ref("/images")
       .list()
@@ -25,7 +29,8 @@ export function Receipts() {
         })
         setPhotos(files)
       })
-  }, [])
+      .catch((err) => console.error(err))
+  }
 
   async function handleShowImage(path: string) {
     try {
@@ -39,6 +44,7 @@ export function Receipts() {
   async function handleDeleteImage(path: string) {
     try {
       await storage().ref(path).delete()
+      fetchPhotos()
     } catch (err) {
       console.error(err)
     }
