@@ -20,9 +20,10 @@ export function SignIn() {
     }
   }
 
-  async function handleSignIn() {
+  async function handleSignInWithEmailAndPassword() {
     try {
-      await auth().signInWithEmailAndPassword(email, password)
+      const { user } = await auth().signInWithEmailAndPassword(email, password)
+      console.log(user)
     } catch (err) {
       console.error(err)
     }
@@ -47,7 +48,7 @@ export function SignIn() {
         value={password}
       />
 
-      <Button title="Entrar" onPress={handleSignIn} />
+      <Button title="Entrar" onPress={handleSignInWithEmailAndPassword} />
 
       <Account>
         <ButtonText title="Recuperar senha" onPress={() => {}} />
